@@ -1,0 +1,23 @@
+author: C Bouton
+database: false
+description: A mafia modding plugin, based on the popular party game of mafia, which
+  has spread onto fora and IRC.
+generator: http://dinnerbone.com/minecraft/tools/pluginator/
+main: me.cbouton.plugins.mafia.Mafia
+name: Mafia
+startup: postworld
+version: 0.1a
+Permissions:
+  mafia.start:
+    default: true
+    description: allows user to start mafia games.
+  mafia.deny:
+    default: false
+    description: disallows a player from mafia games.
+commands:
+  Vote:
+    description: Vote for a player to be lynched.
+    usage: /<command> [playername]
+    aliases: [v]
+  Start:
+    
