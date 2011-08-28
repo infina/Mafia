@@ -17,7 +17,54 @@ Permissions:
 commands:
   Vote:
     description: Vote for a player to be lynched.
-    usage: /<command> [playername]
-    aliases: [v]
+    usage: /<command> {playername}
+    aliases: [v, mafiavote]
+  Votecount:
+    description: displays the votecount.
+    usage: /<command>
+    aliases: [vc, mafiavotecount]
   Start:
+    description: Start a game in signups.
+    usage: /<command>
+    aliases: [mafiastart]
+  Signups:
+    description: Start signups for a mafia game.
+    usage: /<command> [game name]
+    aliases: [mafiasignups]
+  End:
+    description: Ends a game of mafia.
+    usage: /<command>
+    aliases: [mafiaend]
+  Join:
+    description: Joins a game in signups.
+    usage: /<command>
+    aliases: [mafiajoin, j]
+  Part:
+    description: Leaves a game in signups.
+    usage: /<command>
+    aliases: [mafiapart, p]
+  Insert:
+    description: Inserts a player into the game.
+    usage: /<command> {playername}
+    aliases: [mafiainsert]
+  Dead:
+    description: removes a player from the game.
+    usage: /<command> {playername}
+    aliases: [mafiadead]
+  Day:
+    description: forces day.
+    usage: /<command>
+    aliases: [mafiaday]
+  Night:
+    description: forces night.
+    usage: /<command>
+    aliases: [mafianight]
+  Mafia:
+    description: sets a player as mafia, allowing access to night chat.
+    usage: /<command> {playername}
+    aliases: [mafiamafia]
+  MafiaKill:
+    description: sends your choice for nk target to mod.
+    usage: /<command> {playername}
+    aliases: [mafiamafiakill, nk, mafiakill]
     

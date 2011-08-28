@@ -1,6 +1,8 @@
 package me.cbouton.plugins.mafia;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.Player;
@@ -13,8 +15,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Mafia extends JavaPlugin {
     public Set<Player> mafiaplayers = new HashSet<Player>();
     public Set<Player> mafiascum = new HashSet<Player>();
+    public Map<String, String> votecount = new HashMap<String, String>();
+    public Map<String, String> voting = new HashMap<String, String>();
     private PlayerListener playerListener = new MafiaPlayerListener(this);
-    public PluginManager pm = getServer().getPluginManager();
     private CommandExecutor commandListener = new MafiaCommands(this);
     public String mod = null;
     public String phase = null;
@@ -25,13 +28,13 @@ public class Mafia extends JavaPlugin {
 
     public void onEnable() {
         
-        pm.registerEvent(Type.PLAYER_CHAT, playerListener, Priority.Highest, this);
-        pm.registerEvent(Type.PLAYER_QUIT, playerListener, Priority.Monitor, this);
+        getServer().getPluginManager().registerEvent(Type.PLAYER_CHAT, playerListener, Priority.Highest, this);
+        getServer().getPluginManager().registerEvent(Type.PLAYER_QUIT, playerListener, Priority.Monitor, this);
         
-        getCommand("Vote").setExecutor(commandListener);
+        getCommand("Vote").setExecutor(commandListener); //done
         getCommand("Start").setExecutor(commandListener); //done
         getCommand("End").setExecutor(commandListener); //done
-        getCommand("Votecount").setExecutor(commandListener);
+        getCommand("Votecount").setExecutor(commandListener); //done
         getCommand("Day").setExecutor(commandListener); //done
         getCommand("Night").setExecutor(commandListener); //done
         getCommand("Dead").setExecutor(commandListener); //done
@@ -40,6 +43,7 @@ public class Mafia extends JavaPlugin {
         getCommand("Join").setExecutor(commandListener); //done
         getCommand("Part").setExecutor(commandListener); //done
         getCommand("Signups").setExecutor(commandListener); //done
+        getCommand("Insert").setExecutor(commandListener);
         System.out.println(this + " is now enabled!");
     }
     public boolean isPlaying(Player player){
