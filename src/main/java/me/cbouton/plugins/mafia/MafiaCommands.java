@@ -24,11 +24,11 @@ class MafiaCommands implements CommandExecutor {
 
         if(cs instanceof Player && !cs.hasPermission("mafia.deny")){
             Player player = (Player) cs;
-        if("Mafia".equalsIgnoreCase(cmnd.toString()) && args.length == 1){
+        if("Mafia".equalsIgnoreCase(cmnd.getName()) && args.length == 1){
             plugin.setMafia(plugin.getServer().getPlayer(args[1]), !plugin.isMafia(plugin.getServer().getPlayer(args[1])));
             return true;
         }
-        if("Signups".equalsIgnoreCase(cmnd.toString()) && plugin.phase == null && player.hasPermission("mafia.start")){
+        if("Signups".equalsIgnoreCase(cmnd.getName()) && plugin.phase == null && player.hasPermission("mafia.start")){
             plugin.phase = "signups";
             plugin.mod = player.toString();
             if(args.length == 0){
@@ -39,7 +39,7 @@ class MafiaCommands implements CommandExecutor {
             }
             return true;
         }
-        if("Join".equalsIgnoreCase(cmnd.toString()) && "signups".equalsIgnoreCase(plugin.phase)){
+        if("Join".equalsIgnoreCase(cmnd.getName()) && "signups".equalsIgnoreCase(plugin.phase)){
             if(!player.toString().equalsIgnoreCase(plugin.mod)){
                 plugin.setPlaying(player, true);
                 plugin.getServer().broadcastMessage(ChatColor.GOLD + player.getDisplayName() + " is now playing.");
@@ -50,13 +50,13 @@ class MafiaCommands implements CommandExecutor {
             }
             return true;
         }
-        if("Day".equalsIgnoreCase(cmnd.toString()) && plugin.mod.equalsIgnoreCase(player.toString())){
+        if("Day".equalsIgnoreCase(cmnd.getName()) && plugin.mod.equalsIgnoreCase(player.toString())){
             plugin.phase = "Day";
             plugin.getServer().broadcastMessage("It is now day, get to lynching.");
             player.getLocation().getWorld().setTime(800); //set to day
             return true;
         }
-        if("Night".equalsIgnoreCase(cmnd.toString()) && plugin.mod.equalsIgnoreCase(player.toString())){
+        if("Night".equalsIgnoreCase(cmnd.getName()) && plugin.mod.equalsIgnoreCase(player.toString())){
             plugin.phase = "Night";
             plugin.getServer().broadcastMessage("It is now night, go to sleep.");
             player.getLocation().getWorld().setTime(18000); //set to night
@@ -65,12 +65,12 @@ class MafiaCommands implements CommandExecutor {
             plugin.voting = null;
             return true;
         }
-        if("Start".equalsIgnoreCase(cmnd.toString()) && player.toString().equalsIgnoreCase(plugin.mod) && plugin.phase.equalsIgnoreCase("signups") && !plugin.mafiascum.isEmpty()){
+        if("Start".equalsIgnoreCase(cmnd.getName()) && player.toString().equalsIgnoreCase(plugin.mod) && plugin.phase.equalsIgnoreCase("signups") && !plugin.mafiascum.isEmpty()){
             plugin.phase = "Day";
             plugin.getServer().broadcastMessage("The game has started, it is now day.");
             return true;
         }
-        if("Part".equalsIgnoreCase(cmnd.toString()) && plugin.isPlaying(player) && plugin.phase.equalsIgnoreCase("signups")){
+        if("Part".equalsIgnoreCase(cmnd.getName()) && plugin.isPlaying(player) && plugin.phase.equalsIgnoreCase("signups")){
             if(!player.toString().equalsIgnoreCase(plugin.mod)){
                 plugin.setPlaying(player, false);
                 plugin.getServer().broadcastMessage(ChatColor.GOLD + player.getDisplayName() + " has left the game.");
@@ -81,21 +81,21 @@ class MafiaCommands implements CommandExecutor {
             }
             return true;
         }
-        if ("Mafia".equalsIgnoreCase(cmnd.toString()) && player.toString().equalsIgnoreCase(plugin.mod) && args.length == 1){
+        if ("Mafia".equalsIgnoreCase(cmnd.getName()) && player.toString().equalsIgnoreCase(plugin.mod) && args.length == 1){
             Player mafiaplayer = plugin.getServer().getPlayer(args[0]);
             plugin.setMafia(mafiaplayer, !plugin.isMafia(mafiaplayer));
             return true;
         }
-        if("MafiaKill".equalsIgnoreCase(cmnd.toString()) && plugin.isMafia(player) && args.length == 1 && plugin.isPlaying(plugin.getServer().getPlayer(args[0]))){
+        if("MafiaKill".equalsIgnoreCase(cmnd.getName()) && plugin.isMafia(player) && args.length == 1 && plugin.isPlaying(plugin.getServer().getPlayer(args[0]))){
             plugin.getServer().getPlayer(plugin.mod).sendMessage(ChatColor.BLUE + args[0] + " is " + player + "'s choice for the mafia kill");
             return true;
         }
-        if("Dead".equalsIgnoreCase(cmnd.toString()) && player.toString().equalsIgnoreCase(plugin.mod) && args.length == 1 && plugin.isPlaying(plugin.getServer().getPlayer(args[0]))) {
+        if("Dead".equalsIgnoreCase(cmnd.getName()) && player.toString().equalsIgnoreCase(plugin.mod) && args.length == 1 && plugin.isPlaying(plugin.getServer().getPlayer(args[0]))) {
             plugin.setPlaying(plugin.getServer().getPlayer(args[0]), false);
             plugin.getServer().broadcastMessage(ChatColor.DARK_PURPLE + args[0] + " is now dead.");
             return true;
         }
-        if("End".equalsIgnoreCase(cmnd.toString()) && plugin.phase != null){
+        if("End".equalsIgnoreCase(cmnd.getName()) && plugin.phase != null){
             plugin.phase = null;
             plugin.getServer().broadcastMessage(ChatColor.GOLD + "The game is now over.");
             plugin.mod = null;
@@ -105,7 +105,7 @@ class MafiaCommands implements CommandExecutor {
             plugin.voting = null;
             return true;
         }
-        if("Vote".equalsIgnoreCase(cmnd.toString()) && plugin.isPlaying(player) && plugin.phase.equalsIgnoreCase("Day") && args.length > 0 && plugin.isPlaying(plugin.getServer().getPlayer(args[0]))){
+        if("Vote".equalsIgnoreCase(cmnd.getName()) && plugin.isPlaying(player) && plugin.phase.equalsIgnoreCase("Day") && args.length > 0 && plugin.isPlaying(plugin.getServer().getPlayer(args[0]))){
             if (plugin.votecount.containsKey(args[0])) {
                 if(plugin.voting.get(player.getDisplayName()) != null){
                     plugin.votecount.get(plugin.voting.get(player.getDisplayName())).replace(player.getDisplayName(), "");
@@ -129,11 +129,11 @@ class MafiaCommands implements CommandExecutor {
             }
             return true;    
         }
-        if("Votecount".equalsIgnoreCase(cmnd.toString()) && plugin.phase.equalsIgnoreCase("Day")){
+        if("Votecount".equalsIgnoreCase(cmnd.getName()) && plugin.phase.equalsIgnoreCase("Day")){
             plugin.getServer().broadcastMessage(plugin.votecount.toString());
             return true;    
         }
-        if("Insert".equalsIgnoreCase(cmnd.toString()) && player.getDisplayName().equalsIgnoreCase(plugin.mod) && args.length == 1 && (plugin.phase.equalsIgnoreCase("Day") || plugin.phase.equalsIgnoreCase("night"))){
+        if("Insert".equalsIgnoreCase(cmnd.getName()) && player.getDisplayName().equalsIgnoreCase(plugin.mod) && args.length == 1 && (plugin.phase.equalsIgnoreCase("Day") || plugin.phase.equalsIgnoreCase("night"))){
             plugin.setPlaying(plugin.getServer().getPlayer(args[0]), true);
             plugin.getServer().broadcastMessage(ChatColor.DARK_PURPLE + args[0] + " is now playing.");
             return true;
