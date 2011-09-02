@@ -8,9 +8,9 @@ name: Mafia
 startup: postworld
 version: 0.1a
 Permissions:
-  mafia.start:
-    default: true
-    description: allows user to start mafia games.
+  #mafia.start:
+    #default: true
+    #description: allows user to start mafia games.
   mafia.deny:
     default: false
     description: disallows a player from mafia games.
@@ -29,7 +29,7 @@ commands:
     aliases: [mafiastart]
   Signups:
     description: Start signups for a mafia game.
-    usage: /<command> [game name]
+    usage: /<command>
     aliases: [mafiasignups]
   End:
     description: Ends a game of mafia.
