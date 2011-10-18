@@ -3,10 +3,10 @@ database: false
 description: A mafia modding plugin, based on the popular party game of mafia, which
   has spread onto fora and IRC.
 generator: http://dinnerbone.com/minecraft/tools/pluginator/
-main: me.cbouton.plugins.mafia.Mafia
+main: com.cbouton.plugins.mafia.Mafia
 name: Mafia
 startup: postworld
-version: 0.1a
+version: 1.${build.number}
 Permissions:
   #mafia.start:
     #default: true

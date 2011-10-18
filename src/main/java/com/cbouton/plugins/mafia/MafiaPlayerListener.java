@@ -2,11 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package me.cbouton.plugins.mafia;
+package com.cbouton.plugins.mafia;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerChatEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerListener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -49,6 +50,14 @@ public class MafiaPlayerListener extends PlayerListener {
             plugin.getServer().broadcastMessage(ChatColor.DARK_PURPLE + player.getDisplayName() + " is no longer playing");
         }
     }
+
+    @Override
+    public void onPlayerInteract(PlayerInteractEvent event) {
+        Player player = event.getPlayer();
+       
+    }
+    
     
     }    
+
 

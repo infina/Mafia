@@ -1,4 +1,4 @@
-package me.cbouton.plugins.mafia;
+package com.cbouton.plugins.mafia;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -8,8 +8,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event.Priority;
 import org.bukkit.event.Event.Type;
+import org.bukkit.event.entity.EntityListener;
 import org.bukkit.event.player.PlayerListener;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Mafia extends JavaPlugin {
@@ -21,6 +21,7 @@ public class Mafia extends JavaPlugin {
     private CommandExecutor commandListener = new MafiaCommands(this);
     public String mod = null;
     public String phase = null;
+    private EntityListener entityListener = new MafiaEntityListener();
     public void onDisable() {
         
         System.out.println(this + " is now disabled!");
@@ -30,6 +31,7 @@ public class Mafia extends JavaPlugin {
         
         getServer().getPluginManager().registerEvent(Type.PLAYER_CHAT, playerListener, Priority.Highest, this);
         getServer().getPluginManager().registerEvent(Type.PLAYER_QUIT, playerListener, Priority.Monitor, this);
+        getServer().getPluginManager().registerEvent(Type.ENTITY_DAMAGE, entityListener, Priority.Highest, this);
         
         getCommand("Vote").setExecutor(commandListener); //done
         getCommand("Start").setExecutor(commandListener); //done
