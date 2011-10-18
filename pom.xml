@@ -10,9 +10,10 @@
             <url>http://repo.bukkit.org/artifactory/repo</url>
         </repository>
         <repository>
-            <id>commons-lang-repo</id>
-            <url>http://mvnrepository.com/artifact/commons-lang/commons-lang</url>
-            </repository>
+            <id>nuxeo-repo</id>
+            <name>Maven Nuxeo Repository</name>
+            <url>http://maven.nuxeo.org/nexus/content/groups/public/</url>
+        </repository>
     </repositories>
     <build>
         <plugins>
